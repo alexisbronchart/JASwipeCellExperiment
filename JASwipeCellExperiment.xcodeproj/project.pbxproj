@@ -20,6 +20,7 @@
 		1E5554E9187BFE1900206684 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E5554E8187BFE1900206684 /* Storyboard.storyboard */; };
 		1E5554EF187BFFBD00206684 /* JAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5554EB187BFFBD00206684 /* JAViewController.m */; };
 		1E5554F0187BFFBD00206684 /* JASwipeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5554ED187BFFBD00206684 /* JASwipeCell.m */; };
+		1ED83375187C2CD500F6881C /* JATestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED83374187C2CD500F6881C /* JATestCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,8 @@
 		1E5554EC187BFFBD00206684 /* JASwipeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JASwipeCell.h; sourceTree = "<group>"; };
 		1E5554ED187BFFBD00206684 /* JASwipeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JASwipeCell.m; sourceTree = "<group>"; };
 		1E5554EE187BFFBD00206684 /* JAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JAViewController.h; sourceTree = "<group>"; };
+		1ED83373187C2CD500F6881C /* JATestCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JATestCell.h; sourceTree = "<group>"; };
+		1ED83374187C2CD500F6881C /* JATestCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JATestCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +121,8 @@
 				1E5554E8187BFE1900206684 /* Storyboard.storyboard */,
 				1E5554CB187BFD7000206684 /* Images.xcassets */,
 				1E5554C0187BFD7000206684 /* Supporting Files */,
+				1ED83373187C2CD500F6881C /* JATestCell.h */,
+				1ED83374187C2CD500F6881C /* JATestCell.m */,
 			);
 			path = JASwipeCellExperiment;
 			sourceTree = "<group>";
@@ -229,6 +234,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1ED83375187C2CD500F6881C /* JATestCell.m in Sources */,
 				1E5554C6187BFD7000206684 /* main.m in Sources */,
 				1E5554EF187BFFBD00206684 /* JAViewController.m in Sources */,
 				1E5554CA187BFD7000206684 /* JAAppDelegate.m in Sources */,

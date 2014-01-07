@@ -15,8 +15,6 @@ NSString *const JACellShouldHideMenuNotification = @"JACellShouldHideMenuNotific
 @interface JASwipeCell () <UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollView;
-@property (nonatomic, strong) UIView *scrollableContentView;
-@property (nonatomic, strong) UIView *menuView;
 @property (nonatomic, assign) BOOL isShowingMenu;
 
 @end
@@ -29,7 +27,7 @@ NSString *const JACellShouldHideMenuNotification = @"JACellShouldHideMenuNotific
     
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
-        [self initialize];
+        [self initializeCell];
     }
     
     return self;
@@ -38,10 +36,10 @@ NSString *const JACellShouldHideMenuNotification = @"JACellShouldHideMenuNotific
 - (void) awakeFromNib {
 	[super awakeFromNib];
     
-	[self initialize];
+	[self initializeCell];
 }
 
-- (void) initialize {
+- (void) initializeCell {
     
     self.isShowingMenu = NO;
     

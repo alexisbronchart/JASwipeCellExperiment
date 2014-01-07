@@ -7,7 +7,7 @@
 //
 
 #import "JAViewController.h"
-#import "JASwipeCell.h"
+#import "JATestCell.h"
 
 @interface JAViewController ()
 
@@ -39,12 +39,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return 1;
+    return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    JASwipeCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    JATestCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    
+    cell.oloLabel.text = [NSString stringWithFormat:@"Cell n°%d", indexPath.row];
     
     return cell;
 }
