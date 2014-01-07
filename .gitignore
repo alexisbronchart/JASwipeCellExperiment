@@ -1,0 +1,30 @@
+*.xcworkspace
+
+# the build
+Build
+build
+.gradle
+
+# DerivedData
+Docs/API
+
+# temp nibs and swap files
+*~.nib
+*.swp
+*.orig
+
+# OS X folder attributes
+.DS_Store
+
+# user-specific XCode stuff
+*.mode1v3
+*.mode2v3
+*.pbxuser
+*.perspectivev3
+*.xcuserdatad
+
+# CocoaPods
+Pods
+Podfile.lock
+*.xcodeproj/xcshareddata/
+DerivedData
