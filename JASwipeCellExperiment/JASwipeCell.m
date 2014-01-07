@@ -15,13 +15,12 @@ NSString *const JACellShouldHideMenuNotification = @"JACellShouldHideMenuNotific
 @interface JASwipeCell () <UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollView;
-@property (nonatomic, assign) BOOL isShowingMenu;
 
 @end
 
 @implementation JASwipeCell
 
-@synthesize scrollView, scrollableContentView, menuView, isShowingMenu;
+@synthesize scrollView, scrollableContentView, menuView;
 
 - (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     
@@ -41,7 +40,8 @@ NSString *const JACellShouldHideMenuNotification = @"JACellShouldHideMenuNotific
 
 - (void) initializeCell {
     
-    self.isShowingMenu = NO;
+    self.contentView.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
+    self.contentView.backgroundColor = [UIColor whiteColor];
     
     self.menuView = [UIView new];
     self.menuView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -59,6 +59,7 @@ NSString *const JACellShouldHideMenuNotification = @"JACellShouldHideMenuNotific
 	self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.scrollEnabled = YES;
     self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, kMenuWidth);
+    self.scrollView.exclusiveTouch = NO;
 	
 	[self.contentView addSubview:self.scrollView];
     
@@ -68,7 +69,7 @@ NSString *const JACellShouldHideMenuNotification = @"JACellShouldHideMenuNotific
     
     self.scrollableContentView = [UIView new];
     self.scrollableContentView.translatesAutoresizingMaskIntoConstraints = NO;
-    self.scrollableContentView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.75];
+    self.scrollableContentView.backgroundColor = [UIColor whiteColor];
     
     [self.scrollView addSubview:self.scrollableContentView];
     
@@ -78,10 +79,7 @@ NSString *const JACellShouldHideMenuNotification = @"JACellShouldHideMenuNotific
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[scrollableContentView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(scrollableContentView)]];
     
     
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideMenuOptions) name:JACellShouldHideMenuNotification object:nil];
-    
-    self.contentView.backgroundColor = [UIColor greenColor];
 }
 
 
@@ -119,19 +117,13 @@ NSString *const JACellShouldHideMenuNotification = @"JACellShouldHideMenuNotific
         self.scrollView.contentOffset = CGPointZero;
     }
     
-    if (self.scrollView.contentOffset.x >= kMenuWidth/2) {
+    if (self.scrollView.contentOffset.x >= kMenuWidth) {
         
-        if (!self.isShowingMenu) {
-            
-            self.isShowingMenu = YES;
-        }
+        [self.contentView bringSubviewToFront:self.menuView];
         
-    } else if (self.scrollView.contentOffset.x == 0.0f) {
+    } else if (self.scrollView.contentOffset.x < kMenuWidth) {
         
-        if (self.isShowingMenu) {
-            
-            self.isShowingMenu = NO;
-        }
+        [self.contentView sendSubviewToBack:self.menuView];
     }
 }
 
