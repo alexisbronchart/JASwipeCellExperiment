@@ -46,7 +46,7 @@
 
     JATestCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
-    cell.oloLabel.text = [NSString stringWithFormat:@"Cell n°%d", indexPath.row];
+    cell.oloLabel.text = [NSString stringWithFormat:@"Cell n°%ld", (long)indexPath.row];
     
     return cell;
 }

@@ -3,7 +3,7 @@
 //  SwipeCellText
 //
 //  Created by Alexis Bronchart on 21/11/13.
-//  Copyright (c) 2013 Jafar. All rights reserved.
+//  Copyright (c) 2013 Alexis Bronchart. All rights reserved.
 //
 
 #import "JASwipeCell.h"
@@ -20,7 +20,7 @@ NSString *const JACellShouldHideMenuNotification = @"JACellShouldHideMenuNotific
 
 @implementation JASwipeCell
 
-@synthesize scrollView, scrollableContentView, menuView;
+@synthesize scrollView, scrollableContentView, menuView, isShowingMenu;
 
 - (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     
@@ -79,6 +79,8 @@ NSString *const JACellShouldHideMenuNotification = @"JACellShouldHideMenuNotific
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[scrollableContentView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(scrollableContentView)]];
     
     
+    self.isShowingMenu = NO;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideMenuOptions) name:JACellShouldHideMenuNotification object:nil];
 }
 
@@ -88,6 +90,28 @@ NSString *const JACellShouldHideMenuNotification = @"JACellShouldHideMenuNotific
 - (void) hideMenuOptions {
     
     [self.scrollView setContentOffset:CGPointZero animated:YES];
+    self.isShowingMenu = NO;
+}
+
+- (void) showMenuOptions {
+    
+    if (!self.editing) {
+        
+        [self.scrollView setContentOffset:CGPointMake(kMenuWidth, 0) animated:YES];
+        self.isShowingMenu = YES;
+    }
+}
+
+- (void) toggleMenu {
+
+    if (self.isShowingMenu) {
+        
+        [self hideMenuOptions];
+        
+    } else {
+        
+        [self showMenuOptions];
+    }
 }
 
 
