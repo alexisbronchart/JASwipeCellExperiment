@@ -10,7 +10,19 @@
 
 extern NSString *const JACellShouldHideMenuNotification;
 
+@class JASwipeCell;
+
+@protocol JASwipeCellDelegate <NSObject>
+
+@optional
+- (void)menuDidOpenForCell:(JASwipeCell *)cell;
+- (void)menuDidCloseForCell:(JASwipeCell *)cell;
+
+@end
+
 @interface JASwipeCell : UITableViewCell
+
+@property (nonatomic, weak) id<JASwipeCellDelegate> swipeCellDelegate;
 
 @property (nonatomic, strong) UIView *scrollableContentView;
 @property (nonatomic, strong) UIView *menuView;

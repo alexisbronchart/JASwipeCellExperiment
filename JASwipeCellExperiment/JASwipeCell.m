@@ -20,7 +20,7 @@ NSString *const JACellShouldHideMenuNotification = @"JACellShouldHideMenuNotific
 
 @implementation JASwipeCell
 
-@synthesize scrollView, scrollableContentView, menuView, isShowingMenu;
+@synthesize scrollView, scrollableContentView, menuView, isShowingMenu, swipeCellDelegate;
 
 - (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     
@@ -108,9 +108,20 @@ NSString *const JACellShouldHideMenuNotification = @"JACellShouldHideMenuNotific
         
         [self hideMenuOptions];
         
+        if (self.swipeCellDelegate && [self.swipeCellDelegate respondsToSelector:@selector(menuDidCloseForCell:)]) {
+            
+            [self.swipeCellDelegate menuDidCloseForCell:self];
+        }
+        
     } else {
         
         [self showMenuOptions];
+        
+        if (self.swipeCellDelegate && [self.swipeCellDelegate respondsToSelector:@selector(menuDidOpenForCell:)]) {
+            
+            [self.swipeCellDelegate menuDidOpenForCell:self];
+        }
+
     }
 }
 
@@ -121,6 +132,7 @@ NSString *const JACellShouldHideMenuNotification = @"JACellShouldHideMenuNotific
 	[super prepareForReuse];
 	
     [self.scrollView setContentOffset:CGPointZero animated:NO];
+    self.isShowingMenu = NO;
 }
 
 - (void) setEditing:(BOOL)editing animated:(BOOL)animated {
@@ -155,9 +167,19 @@ NSString *const JACellShouldHideMenuNotification = @"JACellShouldHideMenuNotific
     
     if (self.scrollView.contentOffset.x > kMenuWidth/2) {
         
+        if (self.swipeCellDelegate && [self.swipeCellDelegate respondsToSelector:@selector(menuDidOpenForCell:)]) {
+            
+            [self.swipeCellDelegate menuDidOpenForCell:self];
+        }
+        
         targetContentOffset->x = kMenuWidth;
         
     } else {
+        
+        if (self.swipeCellDelegate && [self.swipeCellDelegate respondsToSelector:@selector(menuDidCloseForCell:)]) {
+            
+            [self.swipeCellDelegate menuDidCloseForCell:self];
+        }
         
         *targetContentOffset = CGPointZero;
         
